@@ -16,7 +16,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
 
-    <title>ACCESORIOS</title>
+    <title>Agregar</title>
 </head>
 
 <body>
@@ -38,14 +38,15 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Volver a Inicio</a>
                             </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="{% url 'listarproductos' %}">Productos Gatos</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="{% url 'listarperro' %}">Productos Perros</a>
-                      </li>
+
                       <li class="nav-item">
-                        <a class="nav-link" href="{% url 'listaraccesorios' %}">Productos Accesorios</a>
+                        <a class="nav-link" href="{% url 'form_accesorio' %}">Agrear Accesorios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'form_agregar_comida_perro' %}">Agregar Comida de Perro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'form_agregar_comida_perro' %}">Agregar Comida de Gato</a>
                     </li>
 
                             </ul>
@@ -57,43 +58,32 @@
        </div>
         </div>
         <br>
+       <div class="container" >
         <div class="row">
-          {% load static %}
-          <div>
-            <center>
-              <h3>INVENTARIO DE ACCESORIOS</h3>
-            </center>
-          </div>
-          <center>
-            <table class="col-sm-12 table-bordered table-striped table-condensed cf" style="width: 50%;">
-              <thead class="cf">
-                <tr>
-                  <th scope="col">CODIGO</th>
-                  <th scope="col">NOMBRE</th>
-                  <th scope="col">PRECIO</th>
-                  <th scope="col">DESCRIPCION</th>
-                  <th scope="col">OPCIONES</th>
-    
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  {% for ve in accesorio %}
-                  <td>{{ve.idAccesorio}}</td>
-                  <td>{{ve.nombre}}</td>
-                  <td>{{ve.precio}}</td>
-                  <td>{{ve.descripcion}}</td>
-                  <td><a href="{% url 'form_modi_productos' ve.idAccesorio %}"> Modificar</a></td>
-    
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </center>
-    
+            <div class="cold-12 col-md6 offset-md3">
+            <form method="post" action="" id="formulario">
+              <center> <h2>Agregar Comida de Gatos</h2></center><br><br>
+              <div class="d-flex justify-content-center">
+                {% csrf_token %}
+                <div class="form-group">
+                {{ form }}
+                </div>
+            </div><br>
+            <div class="d-flex justify-content-end">
+                <input type="submit" class="btn btn-danger" id="enviar" value="Enviar">
+                <input type="reset" class="btn btn-primary" id="limpiar" value="Limpiar">
+               <!-- <div id="error" class="alert alert-danger" role="alert"></div>-->
+            </div>
+            </div>
+            </form>
+            <!--<div class="alert alert-success" role="alert">-->
+                {{mensaje}}
+            </div>
+
+
         </div>
     </div>
-
+    </div>
     <div class="piecorto">
         <footer>
             <center>&copy; Tienda AniMall</center>
