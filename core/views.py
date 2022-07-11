@@ -84,6 +84,7 @@ def form_accesorio(request):
             data ['form'] = formulario
     return render (request, 'core/form_accesorio.html', data)
 
+"""AGREGAR LOS PRODUCTOS COMIDA PARA PERRO"""
 
 def form_agregar_comida_perro(request):
     data = {
@@ -100,6 +101,8 @@ def form_agregar_comida_perro(request):
     return render (request, 'core/form_agregar_comida_perro.html', data)
 
 
+"""AGREGAR LOS PRODUCTOS COMIDA PARA GATO"""
+
 def form_agregar_comida_gato(request):
     data = {
         'form': agregarcomidaGatoForm()
@@ -114,6 +117,7 @@ def form_agregar_comida_gato(request):
             data ['form'] = formulario
     return render (request, 'core/form_agregar_comida_gato.html', data)
 
+"""MODIFICAR LOS PRODUCTOS ACCESORIOS"""
 
 def form_modi_productos(request, id):
 
@@ -132,7 +136,7 @@ def form_modi_productos(request, id):
 
     return render(request, 'core/form_modi_productos.html',datos)
 
-
+"""MODIFICAR LOS PRODUCTOS DE COMIDA PARA PERRO"""
 def form_modi_perro(request, id):
 
     produccomidaperro = comidaperro.objects.get(idPerro=id)
@@ -144,10 +148,27 @@ def form_modi_perro(request, id):
         if formulario.is_valid():
             formulario.save()
             datos['mensaje'] = "Modificado Correctamente"
-            return redirect (to="listaraccesorios")
+            return redirect (to="listarperro")
         else:
             datos ['form'] = formulario
 
     return render(request, 'core/form_modi_perro.html',datos)
 
+"""MODIFICAR LOS PRODUCTOS COMIDA PARA GATO"""
 
+def form_modi_gato(request, id):
+
+    produccomidagato = comidagato.objects.get(idGato=id)
+    datos = {
+        'form': agregarcomidaGatoForm(instance=produccomidagato)
+    }
+    if request.method == 'POST':
+        formulario = agregarcomidaGatoForm(data=request.POST, instance=produccomidagato)
+        if formulario.is_valid():
+            formulario.save()
+            datos['mensaje'] = "Modificado Correctamente"
+            return redirect (to="listarproductos")
+        else:
+            datos ['form'] = formulario
+
+    return render(request, 'core/form_modi_gato.html',datos)
