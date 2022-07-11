@@ -28,6 +28,7 @@ urlpatterns = [
    path('form_agregar_comida_perro/', form_agregar_comida_perro, name="form_agregar_comida_perro"),
    path('form_agregar_comida_gato/', form_agregar_comida_gato, name="form_agregar_comida_gato"),
    path('form_modi_productos/<id>/', form_modi_productos, name="form_modi_productos"),
+   path('form_modi_perro/<id>/',     form_modi_perro,     name="form_modi_perro"),
 
    path('api/', include(router.urls)),
    

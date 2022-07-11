@@ -133,3 +133,21 @@ def form_modi_productos(request, id):
     return render(request, 'core/form_modi_productos.html',datos)
 
 
+def form_modi_perro(request, id):
+
+    produccomidaperro = comidaperro.objects.get(idPerro=id)
+    datos = {
+        'form': agregarcomidaPerroForm(instance=produccomidaperro)
+    }
+    if request.method == 'POST':
+        formulario = agregarcomidaPerroForm(data=request.POST, instance=produccomidaperro)
+        if formulario.is_valid():
+            formulario.save()
+            datos['mensaje'] = "Modificado Correctamente"
+            return redirect (to="listaraccesorios")
+        else:
+            datos ['form'] = formulario
+
+    return render(request, 'core/form_modi_perro.html',datos)
+
+
